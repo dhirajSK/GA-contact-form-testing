@@ -5,7 +5,6 @@
   <title>Simple HTML/CSS Contact Form</title>
   
   
-  
       <link rel="stylesheet" href="css/style.css">
 
   
@@ -17,27 +16,49 @@
     <h3>Contact Form</h3>
     <h4>Contact us</h4>
     <fieldset>
-      <input placeholder="Your name" type="text" tabindex="1" required autofocus onfocus="ga('send', 'event', 'Affilate1', 'Afocus1', 'onfield', '1');">
+      <input placeholder="Your name" type="text" tabindex="1" id="name" required">
     </fieldset>
     <fieldset>
-      <input placeholder="Your Email Address" type="email" tabindex="2" required onfocus="ga('send', 'event', 'Affilate2', 'Afocus2', 'onfield', '2');">
+      <input placeholder="Your Email Address" type="email" id="email" required>
     </fieldset>
     <fieldset>
-      <input placeholder="Your Phone Number (optional)" type="tel" tabindex="3" required onfocus="ga('send', 'event', 'Affilate3', 'Afocus3', 'onfield', '3');">
+      <input placeholder="Your Phone Number (optional)" type="tel" id="phn-no" required>
     </fieldset>
     <fieldset>
-      <input placeholder="Your Web Site (optional)" type="url" tabindex="4" required onfocus="ga('send', 'event', 'Affilate4', 'Afocus4', 'onfield', '4');">
+      <input placeholder="Your Web Site (optional)" type="url" id="website" required >
     </fieldset>
     <fieldset>
-      <textarea placeholder="Type your message here...." tabindex="5" required onfocus="ga('send', 'event', 'Affilate5', 'Afocus5', 'onfield', '5');"></textarea>
+      <textarea placeholder="Type your message here...." id="msg"  required "></textarea>
     </fieldset>
     <fieldset>
-      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" onclick="ga('send', 'event', 'Affilate6', 'Afocus6', 'onfield', '6');">Submit</button>
+      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" ">Submit</button>
     </fieldset>
    
   </form>
 </div>
-<script>
+  <script type="text/javascript" src="jquery.min.js"></script>
+  <script type="text/javascript">
+     $(document).ready(function(){
+        $("input").on('focus',function(){ 
+        var sel = $(this).attr('id');
+        checkIt(sel);
+        });
+    });
+
+    function checkIt(sel){
+        var sel2= $('#'+sel);
+        var flag=0;
+        sel2.keypress(function(){ flag=1;});
+        $(sel2).focusout(function(){
+           var x =sel2.val();
+           if(flag==1&x!=""){
+            ga('send', 'event', sel);}
+          });
+        }
+      
+  </script>
+
+  <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -48,6 +69,6 @@
 
 </script>
   
-  
+
 </body>
 </html>
