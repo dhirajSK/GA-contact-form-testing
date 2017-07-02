@@ -41,6 +41,8 @@
      $(document).ready(function(){
         $("input").on('focus',function(){ 
         var sel = $(this).attr('id');
+        fsel =sel+"-focused"
+        ga('send', 'event', fsel,'focused')
         checkIt(sel);
         });
     });
@@ -52,7 +54,7 @@
         $(sel2).focusout(function(){
            var x =sel2.val();
            if(flag==1&x!=""){
-            ga('send', 'event', sel);}
+            ga('send', 'event', sel,'filled');}
           });
         }
       
